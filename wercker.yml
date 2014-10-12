@@ -1,0 +1,26 @@
+box: maxshelley/ubuntu12.04-ruby2.1.3@0.1.0
+no-response-timeout: 10
+services:
+  - wercker/postgresql
+build:
+  steps:
+    - script:
+        name: set timezone
+        code: |
+          export TZ="Asia/Tokyo"
+    - bundle-install
+    - rails-database-yml:
+        service: postgresql
+    - script:
+        name: echo ruby information
+        code: |
+          echo "ruby version $(ruby --version) running!"
+          echo "from location $(which ruby)"
+          echo -p "gem list: $(gem list)"
+    - script:
+        name: Set up db
+        code: RAILS_ENV=test bundle exec rake db:schema:load
+    - script:
+        name: Run RSpec
+        code: bundle exec rspec
+
