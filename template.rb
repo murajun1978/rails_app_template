@@ -5,6 +5,7 @@ gem 'jquery-turbolinks'
 gem 'active_decorator'
 gem 'haml-rails'
 gem 'font-awesome-rails'
+gem 'ransack'
 
 gem_group :development do
   gem 'erb2haml'
