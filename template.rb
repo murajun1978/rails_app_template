@@ -1,4 +1,5 @@
 gretel = yes?('do you want to use gretel?')
+pow = yes?('do you want to use pow?')
 
 gem 'gretel' if gretel
 gem 'jquery-turbolinks'
@@ -13,8 +14,8 @@ gem_group :development do
 
   if `uname` =~ /Darwin/
     gem 'rb-fsevent'
-    gem 'guard-pow', require: false
-    gem 'powder'
+    gem 'guard-pow', require: false if pow
+    gem 'powder' if pow
   end
 end
 
@@ -51,6 +52,7 @@ generate 'gretel:install' if gretel
 run 'bundle binstub guard'
 run 'bin/guard init'
 rake 'haml:replace_erbs'
+run 'bundle exec powder link' if pow
 
 application <<-APPLICATION_RB
 config.generators do |g|
