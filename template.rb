@@ -14,7 +14,6 @@ gem_group :development do
 
   if `uname` =~ /Darwin/
     gem 'rb-fsevent'
-    gem 'guard-pow', require: false if pow
     gem 'powder' if pow
   end
 end
